@@ -3,7 +3,6 @@ class MoviesController < ApplicationController
   def show
     id = params[:id] # retrieve movie ID from URI route
     @movie = Movie.find(id) # look up movie by unique ID
-
     # will render app/views/movies/show.<extension> by default
   end
 
@@ -11,6 +10,8 @@ class MoviesController < ApplicationController
 #     debugger
      @title_class = ""
      @date_class = ""
+     @all_ratings = Movie.all_ratings
+     @selected_ratings = params[:ratings].nil? ? @all_ratings : params[:ratings].keys
 
      if params.has_key? :id
         if params[:id] == "title_header"
@@ -23,7 +24,8 @@ class MoviesController < ApplicationController
           @movies = Movie.all
         end
      else
-        @movies = Movie.all
+#@movies = Movie.all
+        @movies = Movie.all_filter_on_ratings @selected_ratings
      end
   end
 
