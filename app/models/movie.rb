@@ -16,9 +16,9 @@ class Movie < ActiveRecord::Base
     # check for sort
     # ratings should always be there
     if !sort.nil?
-      Movie.where(rating: ratings).order(sort)
+      Movie.where(rating: ratings).order(sort).uniq
     else
-      Movie.where(rating: ratings)
+      Movie.where(rating: ratings).uniq
     end
 
   end
