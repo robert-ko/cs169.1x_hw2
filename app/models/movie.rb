@@ -10,4 +10,18 @@ class Movie < ActiveRecord::Base
     Movie.where(rating: ratings)
   end
 
+
+  def self.sort_and_filter( sort, ratings)
+
+    # check for sort
+    # ratings should always be there
+    if !sort.nil?
+      Movie.where(rating: ratings).order(sort)
+    else
+      Movie.where(rating: ratings)
+    end
+
+  end
+
+
  end
